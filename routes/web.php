@@ -15,14 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Route::get('/dashboard', function () {
-    return view('pages.index');
-})->middleware(['auth', 'verified'])->name('Dashboard');
-
 Route::middleware('auth')->group(function () {
 
+    Route::get('/dashboard', function () {
+        return view('pages.index');
+    })->middleware(['auth', 'verified'])->name('Dashboard');
 
+    Route::get('/', function () {
+        return view('pages.index');
+    })->middleware(['auth', 'verified'])->name('/');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
