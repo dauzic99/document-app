@@ -37,7 +37,7 @@
                         </div>
                     </li>
                     <li class="sidebar-list">
-                        <a class="sidebar-link sidebar-title" href="{{ route('Roles.index') }}">
+                        <a class="sidebar-link sidebar-title" href="{{ route('role.index') }}">
 
                             <i class="fa fa-cogs font-primary" style="margin-right: 10px"></i>
                             <span>Roles</span>

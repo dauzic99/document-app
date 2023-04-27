@@ -26,8 +26,11 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('Dashboard');
     });
 
-    Route::prefix('Role')->controller(RoleController::class)->group(function () {
-        Route::get('/', 'index')->name('Roles.index');
+    Route::prefix('role')->controller(RoleController::class)->group(function () {
+        Route::get('/', 'index')->name('role.index');
+        Route::get('/get', 'get')->name('role.get');
+        Route::get('/edit/{id}', 'edit')->name('role.edit');
+        Route::delete('/delete/{id}', 'delete')->name('role.delete');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
