@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,12 @@ Route::middleware('auth')->group(function () {
     })->middleware(['auth', 'verified'])->name('Dashboard');
 
     Route::get('/', function () {
-        return view('pages.index');
-    })->middleware(['auth', 'verified'])->name('/');
+        return redirect()->route('Dashboard');
+    });
+
+    Route::prefix('Role')->controller(RoleController::class)->group(function () {
+        Route::get('/', 'index')->name('Roles.index');
+    });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

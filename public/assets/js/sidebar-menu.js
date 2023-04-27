@@ -73,9 +73,9 @@ if ($('#pageWrapper').hasClass('compact-wrapper')) {
             });
             jQuery('.sidebar-submenu, .menu-content').hide();
             }
-    
+
 } else if ($('#pageWrapper').hasClass('compact-sidebar')) {
-    
+
     var contentwidth = jQuery(window).width();
     if ((contentwidth) > 992) {
             $('<div class="bg-overlay1"></div>').appendTo($('body'));
@@ -97,11 +97,11 @@ if ($('#pageWrapper').hasClass('compact-wrapper')) {
                  jQuery('.sidebar-submenu, .menu-content').slideUp('normal');
                 $(this).removeClass("active");
             });
-        } 
-        if ((contentwidth) < '992') { 
+        }
+        if ((contentwidth) < '992') {
             $(".bg-overlay").addClass("active");
         }
-        
+
     });
     jQuery('.sidebar-submenu, .menu-content').hide();
     jQuery('.submenu-title').append('<div class="according-menu"><i class="fa fa-angle-right"></i></div>');
@@ -117,7 +117,7 @@ if ($('#pageWrapper').hasClass('compact-wrapper')) {
         }
     });
     jQuery('.submenu-content').hide();
-} 
+}
 
 // toggle sidebar
 $nav = $('.sidebar-wrapper');
@@ -200,7 +200,7 @@ var menuWrapperSize = getMenuWrapperSize();
 
 if ((menuWrapperSize) >= '1660') {
     var sliderLimit = -3000
-    
+
 } else if ((menuWrapperSize) >= '1440') {
     var sliderLimit = -3600
 } else {
@@ -279,7 +279,7 @@ $(document).click(function(){
     $('.header-level-menu').removeClass("show");
 });
 
-$(window).scroll(function() { 
+$(window).scroll(function() {
     var scroll = $(window).scrollTop();
     if (scroll >= 50) {
         $('.mega-menu-container').removeClass('show');
@@ -309,7 +309,7 @@ $(document).on("click", function(event){
     var $trigger = $(".outside");
     if($trigger !== event.target && !$trigger.has(event.target).length){
         $(".menu-to-be-close").slideUp("fast");
-    }            
+    }
 });
 
 
@@ -340,80 +340,81 @@ if($('.simplebar-wrapper .simplebar-content-wrapper') && $('#pageWrapper').hasCl
 }
 
 // Sidebar pin-drops
-const pinTitle = document.querySelector(".pin-title");
-let pinIcon = document.querySelectorAll(".sidebar-list .fa-thumb-tack");
-function togglePinnedName() {
-  if (document.getElementsByClassName("pined").length) {
-    if (!pinTitle.classList.contains("show")) pinTitle.classList.add("show");
-  } else {
-    pinTitle.classList.remove("show");
-  }
-}
+// const pinTitle = document.querySelector(".pin-title");
+// let pinIcon = document.querySelectorAll(".sidebar-list .fa-thumb-tack");
 
-pinIcon.forEach((item, index) => {
-  var linkName = item.parentNode.querySelector("span").innerHTML;
-  var InitialLocalStorage = JSON.parse(localStorage.getItem("pins") || false);
+// function togglePinnedName() {
+//   if (document.getElementsByClassName("pined").length) {
+//     if (!pinTitle.classList.contains("show")) pinTitle.classList.add("show");
+//   } else {
+//     pinTitle.classList.remove("show");
+//   }
+// }
 
-  if (InitialLocalStorage && InitialLocalStorage.includes(linkName)) {
-    item.parentNode.classList.add("pined");
-  }
-  item.addEventListener("click", (event) => {
-    var localStoragePins = JSON.parse(localStorage.getItem("pins") || false);
-    item.parentNode.classList.toggle("pined");
+// pinIcon.forEach((item, index) => {
+//   var linkName = item.parentNode.querySelector("span").innerHTML;
+//   var InitialLocalStorage = JSON.parse(localStorage.getItem("pins") || false);
 
-    if (localStoragePins?.length) {
-      if (item.parentNode.classList.contains("pined")) {
-        !localStoragePins?.includes(linkName) &&
-          (localStoragePins = [...localStoragePins, linkName]);
-      } else {
-        localStoragePins?.includes(linkName) &&
-          localStoragePins.splice(localStoragePins.indexOf(linkName), 1);
-      }
-      localStorage.setItem("pins", JSON.stringify(localStoragePins));
-    } else {
-      localStorage.setItem("pins", JSON.stringify([linkName]));
-    }
+//   if (InitialLocalStorage && InitialLocalStorage.includes(linkName)) {
+//     item.parentNode.classList.add("pined");
+//   }
+//   item.addEventListener("click", (event) => {
+//     var localStoragePins = JSON.parse(localStorage.getItem("pins") || false);
+//     item.parentNode.classList.toggle("pined");
 
-    var elem = item;
-    var topPos = elem.offsetTop;
-    togglePinnedName();
-    if (item.parentElement.parentElement.classList.contains("pined")) {
-      scrollTo(
-        document.getElementsByClassName("simplebar-content-wrapper")[0],
-        topPos - 30,
-        600
-      );
-    } else {
-      scrollTo(
-        document.getElementsByClassName("simplebar-content-wrapper")[0],
-        elem.parentNode.offsetTop - 30,
-        600
-      );
-    }
-  });
+//     if (localStoragePins?.length) {
+//       if (item.parentNode.classList.contains("pined")) {
+//         !localStoragePins?.includes(linkName) &&
+//           (localStoragePins = [...localStoragePins, linkName]);
+//       } else {
+//         localStoragePins?.includes(linkName) &&
+//           localStoragePins.splice(localStoragePins.indexOf(linkName), 1);
+//       }
+//       localStorage.setItem("pins", JSON.stringify(localStoragePins));
+//     } else {
+//       localStorage.setItem("pins", JSON.stringify([linkName]));
+//     }
 
-  function scrollTo(element, to, duration) {
-    var start = element.scrollTop,
-      change = to - start,
-      currentTime = 0,
-      increment = 20;
+//     var elem = item;
+//     var topPos = elem.offsetTop;
+//     togglePinnedName();
+//     if (item.parentElement.parentElement.classList.contains("pined")) {
+//       scrollTo(
+//         document.getElementsByClassName("simplebar-content-wrapper")[0],
+//         topPos - 30,
+//         600
+//       );
+//     } else {
+//       scrollTo(
+//         document.getElementsByClassName("simplebar-content-wrapper")[0],
+//         elem.parentNode.offsetTop - 30,
+//         600
+//       );
+//     }
+//   });
 
-    var animateScroll = function () {
-      currentTime += increment;
-      var val = Math.easeInOutQuad(currentTime, start, change, duration);
-      element.scrollTop = val;
-      if (currentTime < duration) {
-        setTimeout(animateScroll, increment);
-      }
-    };
-    animateScroll();
-  }
+//   function scrollTo(element, to, duration) {
+//     var start = element.scrollTop,
+//       change = to - start,
+//       currentTime = 0,
+//       increment = 20;
 
-  Math.easeInOutQuad = function (t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return (c / 2) * t * t + b;
-    t--;
-    return (-c / 2) * (t * (t - 2) - 1) + b;
-  };
-});
-togglePinnedName();
+//     var animateScroll = function () {
+//       currentTime += increment;
+//       var val = Math.easeInOutQuad(currentTime, start, change, duration);
+//       element.scrollTop = val;
+//       if (currentTime < duration) {
+//         setTimeout(animateScroll, increment);
+//       }
+//     };
+//     animateScroll();
+//   }
+
+//   Math.easeInOutQuad = function (t, b, c, d) {
+//     t /= d / 2;
+//     if (t < 1) return (c / 2) * t * t + b;
+//     t--;
+//     return (-c / 2) * (t * (t - 2) - 1) + b;
+//   };
+// });
+// togglePinnedName();

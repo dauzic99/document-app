@@ -227,7 +227,8 @@ height: 80px;
                         <h5>Content title</h5>
                         <p>Add a heading to card with <code>.card-header</code> class</p>
                         <p>You may also include any &lt;h1&gt;-&lt;h6&gt; with a <code>.card-header </code> &
-                            <code>.card-title</code> class to add heading.</p>
+                            <code>.card-title</code> class to add heading.
+                        </p>
                         <p>Jelly beans sugar plum cheesecake cookie oat cake soufflé. Tart lollipop carrot cake sugar plum.
                             Marshmallow wafer tiramisu jelly beans.</p>
                     </div>
@@ -243,7 +244,8 @@ height: 80px;
                         <p>Add a heading to card with <code>.card-header </code> class & without header
                             border<code>.border-bottom-0</code> class.</p>
                         <p>You may also include any &lt;h1&gt;-&lt;h6&gt; with a <code>.card-header </code> &
-                            <code>.card-title</code> class to add heading.</p>
+                            <code>.card-title</code> class to add heading.
+                        </p>
                         <p>Gingerbread brownie sweet roll cheesecake chocolate cake jelly beans marzipan gummies dessert.
                             Jelly beans sugar plum cheesecake cookie oat cake soufflé.</p>
                     </div>

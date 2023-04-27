@@ -16,30 +16,33 @@
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
                                 aria-hidden="true"></i></div>
                     </li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title" href="{{ route('Dashboard') }}"
-                            target="_blank">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-home') }}"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-home') }}"></use>
-                            </svg><span>Dashboard</span></a></li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title"
-                            href="https://pixelstrap.freshdesk.com/support/home" target="_blank">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-social') }}"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-social') }}"></use>
-                            </svg><span>Raise Support</span></a></li>
-                    <li class="sidebar-list"><a class="sidebar-link sidebar-title"
-                            href="https://docs.pixelstrap.com/cuba/laravel/document/" target="_blank">
-                            <svg class="stroke-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#stroke-form') }}"></use>
-                            </svg>
-                            <svg class="fill-icon">
-                                <use href="{{ asset('assets/svg/icon-sprite.svg#fill-form') }}"></use>
-                            </svg><span>Documentation </span></a></li>
+
+                    <hr style="margin-top: 8px">
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>General</h6>
+                        </div>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="{{ route('Dashboard') }}">
+                            <i class="fa fa-tachometer font-primary" style="margin-right: 10px"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+
+                    <hr style="margin-top: 8px">
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Manajerial User</h6>
+                        </div>
+                    </li>
+                    <li class="sidebar-list">
+                        <a class="sidebar-link sidebar-title" href="{{ route('Roles.index') }}">
+
+                            <i class="fa fa-cogs font-primary" style="margin-right: 10px"></i>
+                            <span>Roles</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
