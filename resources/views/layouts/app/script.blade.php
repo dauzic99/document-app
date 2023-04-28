@@ -17,6 +17,9 @@
 <script src="{{ asset('assets/js/slick/slick.min.js') }}"></script>
 <script src="{{ asset('assets/js/slick/slick.js') }}"></script>
 <script src="{{ asset('assets/js/header-slick.js') }}"></script>
+<!-- bootstrap notify js -->
+<script src="{{ asset('assets/js/notify/bootstrap-notify.min.js') }}"></script>
+<script src="{{ asset('assets/js/notify/notify-script.js') }}"></script>
 @yield('js')
 
 @if (Route::current()->getName() != 'popover')
@@ -31,6 +34,36 @@
 
 @yield('script')
 
+<script>
+    function notify(title, message, type) {
+        $.notify({
+            title: title,
+            message: message
+        }, {
+            type: type,
+            allow_dismiss: false,
+            newest_on_top: false,
+            mouse_over: false,
+            showProgressbar: false,
+            spacing: 10,
+            timer: 2000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            },
+            offset: {
+                x: 30,
+                y: 30
+            },
+            delay: 1000,
+            z_index: 10000,
+            animate: {
+                enter: 'animated bounce',
+                exit: 'animated bounce'
+            }
+        });
+    }
+</script>
 {{-- @if (Route::current()->getName() == 'index')
 	<script src="{{asset('assets/js/layout-change.js')}}"></script>
 @endif --}}

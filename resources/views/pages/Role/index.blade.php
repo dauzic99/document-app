@@ -1,6 +1,6 @@
 @extends('layouts.app.master')
 
-@section('title', Str::ucfirst($prefix))
+@section('title', 'Kelola ' . Str::ucfirst($prefix))
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/vendors/animate.css') }}">
@@ -27,8 +27,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>Data</h5>
+
                     </div>
+
                     <div class="card-body">
+                        <a href="{{ route($prefix . '.create') }}" class="btn btn-outline-primary mb-4"><i
+                                class="fa fa-plus"></i>
+                            Tambah</a>
                         <table class="display" id="table-index">
                             <thead>
                                 <tr>
@@ -52,9 +57,20 @@
 @section('js')
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+    <!-- Sweet alert jquery-->
+    <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/sweet-alert/app.js') }}"></script> --}}
 @endsection
 
 @section('script')
+    @if (session('success'))
+        <script>
+            $(document).ready(function() {
+                var successMessage = '{{ session('success') }}';
+                notify('Sukses', successMessage, 'primary')
+            });
+        </script>
+    @endif
     <script>
         $(document).ready(function() {
             $('#table-index').DataTable({
@@ -100,11 +116,47 @@
                             return '<a href="' + edit_url +
                                 '" class="btn btn-outline-info"><i class="fa fa-pencil"></i></a> ' +
                                 '<a href="' + delete_url +
-                                '" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a> ';
+                                '" class="btn btn-outline-danger delete-btn"><i class="fa fa-trash"></i></a> ';
                         }
                     },
                 ]
             });
+
+            $(document).on('click', '.delete-btn', function(event) {
+                event.preventDefault();
+
+                deleteData($(this).attr('href'), '#table-index');
+            });
         });
+
+        function deleteData(url, datatable) {
+            swal({
+                    title: "Anda yakin menghapus data ?",
+                    text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: url,
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
+                            dataType: "JSON",
+                            success: function(response) {
+                                swal(response.message, {
+                                    icon: "success",
+                                });
+                                $(datatable).DataTable().ajax.reload();
+                            }
+                        });
+                    } else {
+                        swal("Data tidak jadi dihapus!");
+                    }
+                });
+        }
     </script>
 @endsection

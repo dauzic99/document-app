@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/vendors/themify.css') }}">
 <!-- ico-font-->
 
 @yield('css')

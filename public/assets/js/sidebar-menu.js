@@ -251,7 +251,7 @@ if ($('#pageWrapper').hasClass('compact-wrapper')) {
         // var link = $(this).attr("href").substring(21);
         var link = $(this).attr("href");
         if (link) {
-            if (current == link) {
+            if (current.includes(link)) {
                 $(this).parents().children('a').addClass('active');
                 $(this).parents().parents().children('ul').css('display', 'block');
                 $(this).addClass('active');
