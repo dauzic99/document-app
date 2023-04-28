@@ -63,6 +63,67 @@
             }
         });
     }
+
+    function deleteData(url, datatable) {
+        swal({
+                title: "Anda yakin menghapus data ?",
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        data: {
+                            "_token": "{{ csrf_token() }}"
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            swal(response.message, {
+                                icon: "success",
+                            });
+                            $(datatable).DataTable().ajax.reload();
+                        }
+                    });
+                } else {
+                    swal("Data tidak jadi dihapus!");
+                }
+            });
+    }
+
+    function deleteDatas(url, datatable, ids) {
+        swal({
+                title: "Anda yakin menghapus semua data yang dipilih?",
+                text: "Data yang sudah dihapus tidak dapat dikembalikan!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: url,
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            ids: ids
+                        },
+                        dataType: "JSON",
+                        success: function(response) {
+                            swal(response.message, {
+                                icon: "success",
+                            });
+                            $(datatable).DataTable().ajax.reload();
+                        }
+                    });
+                } else {
+                    swal("Data tidak jadi dihapus!");
+                }
+            });
+    }
 </script>
 {{-- @if (Route::current()->getName() == 'index')
 	<script src="{{asset('assets/js/layout-change.js')}}"></script>

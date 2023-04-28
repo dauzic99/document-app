@@ -56,6 +56,11 @@ class RoleService
         return $role->delete();
     }
 
+    public function deleteAll(array $ids)
+    {
+        return Role::whereIn('id', $ids)->delete();
+    }
+
     public function assignPermission(array $permission, Role $role)
     {
         $role->syncPermissions([$permission]);

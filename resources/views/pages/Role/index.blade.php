@@ -34,9 +34,16 @@
                         <a href="{{ route($prefix . '.create') }}" class="btn btn-outline-primary mb-4"><i
                                 class="fa fa-plus"></i>
                             Tambah</a>
+
+                        <a href="{{ route($prefix . '.deleteAll') }}" class="btn btn-outline-danger mb-4"
+                            style="display:none" id="delete-selected"><i class="fa fa-trash"></i>
+                            Hapus Pilihan</a>
                         <table class="display" id="table-index">
                             <thead>
                                 <tr>
+                                    <th width="5%">
+                                        <input class="" id="select-all" type="checkbox">
+                                    </th>
                                     <th width="5%">#</th>
                                     <th>Nama {{ Str::ucfirst($prefix) }}</th>
                                     <th>Hak Akses</th>
@@ -76,10 +83,24 @@
             $('#table-index').DataTable({
                 serverSide: true,
                 ajax: '{{ route('role.get') }}',
+                "order": [
+                    [2, "asc"]
+                ],
                 columns: [{
+                        data: null,
+                        name: 'select',
+                        searchable: false,
+                        orderable: false,
+                        render: function(data, type, row) {
+                            return '<input type="checkbox" class="datatable-checkbox" data-id="' +
+                                data.id + '">';
+                        }
+                    },
+                    {
                         data: 'id',
                         name: 'id',
                         searchable: false,
+                        orderable: false,
                         render: function(data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart +
                                 1; // add 1 to start at 1 instead of 0
@@ -127,36 +148,41 @@
 
                 deleteData($(this).attr('href'), '#table-index');
             });
-        });
 
-        function deleteData(url, datatable) {
-            swal({
-                    title: "Anda yakin menghapus data ?",
-                    text: "Data yang sudah dihapus tidak dapat dikembalikan!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: url,
-                            data: {
-                                "_token": "{{ csrf_token() }}"
-                            },
-                            dataType: "JSON",
-                            success: function(response) {
-                                swal(response.message, {
-                                    icon: "success",
-                                });
-                                $(datatable).DataTable().ajax.reload();
-                            }
-                        });
-                    } else {
-                        swal("Data tidak jadi dihapus!");
-                    }
+
+            $(document).on('click', '#delete-selected', function(event) {
+                event.preventDefault();
+                var ids = [];
+                $('.datatable-checkbox:checked').each(function() {
+                    ids.push($(this).data('id'));
                 });
-        }
+                deleteDatas($(this).attr('href'), '#table-index', ids);
+                $('#delete-selected').toggle(checked);
+            });
+
+            $('#select-all').on('click', function() {
+                var checked = $(this).is(':checked');
+                $('.datatable-checkbox').prop('checked', checked);
+                $('#delete-selected').toggle(checked);
+
+            });
+
+            // Handle checkbox click event
+            $('#table-index tbody').on('click', '.datatable-checkbox', function() {
+
+                if ($(this).prop('checked') == 0) {
+                    $('#select-all').prop('checked', 0);
+                }
+                // Get all checkboxes
+                var checkboxes = $('#table-index tbody .datatable-checkbox');
+
+                // Check if at least one checkbox is checked
+                var checked = checkboxes.filter(':checked').length > 0;
+
+                console.log(checked);
+                // Show or hide the delete button depending on whether at least one checkbox is checked
+                $('#delete-selected').toggle(checked);
+            });
+        });
     </script>
 @endsection

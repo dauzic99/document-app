@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', 'edit')->name('role.edit');
         Route::patch('/update/{id}', 'update')->name('role.update');
         Route::delete('/delete/{id}', 'delete')->name('role.delete');
+        Route::delete('/deleteAll', 'deleteAll')->name('role.deleteAll');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

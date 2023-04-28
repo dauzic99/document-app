@@ -88,4 +88,13 @@ class RoleController extends Controller
             'message' => 'Role berhasil dihapus'
         ]);
     }
+
+    public function deleteAll(Request $request)
+    {
+        // dd($request->ids);
+        $role = $this->roleService->deleteAll($request->ids);
+        return response()->json([
+            'message' => 'Role yang dipilih berhasil dihapus'
+        ]);
+    }
 }
