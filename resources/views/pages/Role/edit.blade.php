@@ -59,14 +59,12 @@
                             <div class="row">
                                 @forelse ($permissions as $item)
                                     <div class="col-md-6">
-                                        <div class="form-check checkbox checkbox-solid-primary">
-                                            <input class="form-check-input" id="permission-{{ $loop->iteration }}"
+                                        <label class="d-block" for="permission-{{ $loop->iteration }}">
+                                            <input class="checkbox_animated" id="permission-{{ $loop->iteration }}"
                                                 type="checkbox" name="permissions[]" value="{{ $item->id }}"
                                                 {{ $data->hasPermissionTo($item->name) ? 'checked=""' : '' }}>
-                                            <label class="form-check-label"
-                                                for="permission-{{ $loop->iteration }}">{{ $item->name }}</label>
-                                        </div>
-
+                                            {{ $item->name }}
+                                        </label>
                                     </div>
                                 @empty
                                 @endforelse
@@ -80,6 +78,9 @@
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" type="submit" data-bs-original-title=""
                                         title="">Simpan</button>
+                                    <a href="{{ route($prefix . '.index') }}" class="btn btn-outline-secondary">
+                                        Kembali
+                                    </a>
                                 </div>
                             </div>
                         </div>
