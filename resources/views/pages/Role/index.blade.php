@@ -157,7 +157,7 @@
                     ids.push($(this).data('id'));
                 });
                 deleteDatas($(this).attr('href'), '#table-index', ids);
-                $('#delete-selected').toggle(checked);
+                $('#delete-selected').hide();
             });
 
             $('#select-all').on('click', function() {
