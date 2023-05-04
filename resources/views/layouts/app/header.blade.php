@@ -35,7 +35,8 @@
 
                 <li class="profile-nav onhover-dropdown pe-0 py-0">
                     <div class="media profile-media"><img class="b-r-10"
-                            src="{{ asset('assets/images/dashboard/profile.png') }}" alt="">
+                            src="{{ Avatar::create(Auth::user()->name)->toBase64() }}"
+                            alt="{{ Auth::user()->name }} Avatar">
                         <div class="media-body"><span>{{ Auth::user()->name }}</span>
                             <p class="mb-0 font-roboto">{{ Auth::user()->getRoleNames() }} <i
                                     class="middle fa fa-angle-down"></i></p>
