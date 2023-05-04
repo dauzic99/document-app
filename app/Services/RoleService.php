@@ -11,7 +11,8 @@ class RoleService
 {
     public function get()
     {
-        $datas = Role::with('permissions')->where('name', '!=', 'Super-Admin')->get();
+        $datas = Role::query();
+        $datas->with('permissions')->where('name', '!=', 'Super-Admin');
 
         return DataTables::of($datas)->make(true);
     }
